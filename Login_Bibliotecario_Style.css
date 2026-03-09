@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #ffffff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+.container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.container h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea, #3673f5);
+    margin: 10px auto 0;
+    border-radius: 3px;
+}
+
+/* MENSAGEM DE AVISO */
+.cadMensagem {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 280px;
+    max-width: 400px;
+    padding: 16px 24px;
+    border-radius: 50px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    color: #333;
+    border-left: 5px solid #1738cc;
+    animation: slideDown 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(23, 56, 204, 0.2);
+}
+
+.cadMensagem {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 2000;
+    display: none;
+    max-width: 350px;
+    text-align: center;
+    color: white;
+    animation: slideIn 0.3s ease;
+}
+
+.cadMensagem.sucesso {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.cadMensagem.erro {
+    background: linear-gradient(135deg, #dc3545, #f56c6c);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: white;
+}
+
+input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+button[type="submit"] {
+    background: linear-gradient(135deg, #4362ec 0%, #5e76ff 100%);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+button[type="submit"] i {
+    font-size: 18px;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #5e76ff 0%, #4362ec 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.link {
+    margin: 20px 0 15px;
+    font-size: 14px;
+}
+
+.link a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.link a:hover {
+    color: #1505f0;
+    text-decoration: underline;
+}
+
+.voltar {
+    background: #e0e0e0;
+    color: #666;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.voltar i {
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+
+.voltar:hover {
+    background: #d0d0d0;
+    color: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+.voltar:hover i {
+    transform: translateX(-3px);
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 20px;
+    }
+    .container h2 {
+        font-size: 24px;
+    }
+    input {
+        padding: 12px 15px;
+    }
+}

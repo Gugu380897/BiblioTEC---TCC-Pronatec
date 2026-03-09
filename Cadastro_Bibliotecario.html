@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Bibliotecário</title>
+    <link rel="icon" type="image/x-icon" href="images/BiblioTEC_Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="CSS/Cad_Bibliotecario_Style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro Bibliotecário</h2>
+        <div id="mensagemCadastro" class="cadMensagem"></div>
+        <form id="cadastroForm">
+            <input type="text" id="nomeBiblio" placeholder="Nome completo" required>
+            <input type="email" id="emailBiblio" placeholder="E-mail" required>
+            <input type="password" id="passwordBiblio" placeholder="Senha" required>
+            <input type="password" id="confirmPasswordBiblio" placeholder="Confirmar Senha" required>
+            <input type="number" id="idBibliotecarioNum" placeholder="ID do Bibliotecário" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p class="link">
+            <a href="Login_Bibliotecario.html">Já tem conta? Faça login</a>
+        </p>
+        <button class="voltar" onclick="history.back()">
+            <i class="fa fa-arrow-left"></i> Voltar
+        </button>
+    </div>
+    <script type="module" src="JS/Firebase_Cad_Bibliotecario.js"></script>
+</body>
+</html>

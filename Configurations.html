@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - BiblioTEC</title>
+    <link rel="icon" type="image/x-icon" href="images/BiblioTEC_Logo.png">
+    <link rel="stylesheet" href="CSS/Config_Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header class="header">
+        <button class="menu-ligar" id="menuLigar">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="logo">
+            <img src="images/BiblioTEC_Logo.png" alt="BiblioTEC Logo">
+        </div>
+        <div class="overlay" id="overlay"></div>
+
+        <nav class="offcanvas-menu" id="offcanvasMenu">
+            <div class="menu-header">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="https://via.placeholder.com/60" alt="Avatar">
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">Carregando...</span>
+                        <span class="user-email">carregando...</span>
+                        <span class="user-type">...</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="menu-items">
+                <li class="user-menu-item"><a href="Home.html"><span class="fa fa-home"></span>Home</a></li>
+                <li><a href="Profile.html"><span class="fa fa-user"></span>Meu Perfil</a></li>
+                <li><a href="Historico_Alugueis.html"><span class="fa fa-history"></span>Histórico de Alugueis</a></li>
+                <li><a href="Alugueis_Atuais.html"><span class="fa fa-book"></span>Alugueis Atuais</a></li>
+                <li class="active"><a href="Configurations.html"><span class="fa fa-cog"></span>Configurações</a></li>
+                <li class="logout"><a href="#"><span class="fa fa-sign-out"></span>Sair</a></li>
+                <li class="login"><a href="Login.html"><span class="fa fa-sign-in"></span>Login</a></li>
+                <li class="login"><a href="Cadastro_Cargo.html"><span class="fa fa-user-plus"></span>Cadastrar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="main-div">
+            <div id="loading-state" class="loading-state">
+                <div class="spinner"></div>
+                <span>Carregando...</span>
+            </div>
+
+            <div id="logged-content">
+                <div class="page-header">
+                    <h1><span class="fa fa-cog"></span> Configurações</h1>
+                    <p>Gerencie suas preferências e dados da conta.</p>
+                </div>
+                <div class="line"></div>
+
+                <div class="settings-layout">
+                    <div class="settings-sidebar">
+                        <ul>
+                            <li class="active" data-tab="perfil"><span class="fa fa-user"></span> Perfil</li>
+                            <li data-tab="conta"><span class="fa fa-id-card"></span> Conta</li>
+                            <li data-tab="privacidade"><span class="fa fa-shield"></span> Privacidade</li>
+                            <li data-tab="notificacoes"><span class="fa fa-bell"></span> Notificações</li>
+                            <li data-tab="seguranca"><span class="fa fa-lock"></span> Segurança</li>
+                            <li data-tab="ajuda"><span class="fa fa-question-circle"></span> Ajuda</li>
+                        </ul>
+                    </div>
+
+                    <div class="settings-content">
+                        <!-- Perfil -->
+                        <div class="tab-pane active" id="perfil">
+                            <h2>Perfil</h2>
+                            <form id="formPerfil">
+                                <label>Nome completo</label>
+                                <input type="text" id="profileNome" value="" placeholder="Seu nome">
+                                
+                                <label>E-mail</label>
+                                <input type="email" id="profileEmail" value="" placeholder="Seu e-mail" readonly>
+                                
+                                <label>Tipo de usuário</label>
+                                <input type="text" id="profileTipo" value="" readonly>
+                                
+                                <label>CPF / Matrícula</label>
+                                <input type="text" id="profileId" value="" readonly>
+                                
+                                <label>Foto de perfil</label>
+                                <input type="file" id="profileFoto" accept="image/*">
+                                
+                                <button type="submit" class="settings-save-btn">Salvar alterações</button>
+                            </form>
+                        </div>
+
+                        <!-- Conta -->
+                        <div class="tab-pane" id="conta">
+                            <h2>Conta</h2>
+                            <form id="formConta">
+                                <label>Nome de usuário (apelido)</label>
+                                <input type="text" id="contaUsername" value="" placeholder="Nome de usuário">
+                                
+                                <label>E-mail de recuperação</label>
+                                <input type="email" id="contaEmailRecuperacao" value="" placeholder="E-mail alternativo">
+                                
+                                <label>Número de telefone</label>
+                                <input type="tel" id="contaTelefone" value="" placeholder="Telefone">
+                                
+                                <button type="submit" class="settings-save-btn">Salvar alterações</button>
+                            </form>
+                        </div>
+
+                        <!-- Privacidade -->
+                        <div class="tab-pane" id="privacidade">
+                            <h2>Privacidade</h2>
+                            <form id="formPrivacidade">
+                                <label><input type="checkbox" id="privacidadeCompartilhar"> Compartilhar dados de leitura com outras bibliotecas</label>
+                                <label><input type="checkbox" id="privacidadeHistorico"> Permitir que outros vejam meu histórico de empréstimos</label>
+                                <label><input type="checkbox" id="privacidadeRecomendacoes"> Receber recomendações personalizadas</label>
+                                
+                                <h3>Dados pessoais</h3>
+                                <p><a href="#" id="exportarDados">Solicitar exportação dos meus dados</a></p>
+                                
+                                <button type="submit" class="settings-save-btn">Salvar preferências</button>
+                            </form>
+                        </div>
+
+                        <!-- Notificações -->
+                        <div class="tab-pane" id="notificacoes">
+                            <h2>Notificações</h2>
+                            <form id="formNotificacoes">
+                                <label><input type="checkbox" id="notifEmail"> Notificações por e-mail</label>
+                                <label><input type="checkbox" id="notifLembretes"> Lembretes de devolução</label>
+                                <label><input type="checkbox" id="notifNovidades"> Novidades e promoções</label>
+                                <label><input type="checkbox" id="notifReservas"> Alertas de reserva</label>
+                                
+                                <button type="submit" class="settings-save-btn">Salvar preferências</button>
+                            </form>
+                        </div>
+
+                        <!-- Segurança -->
+                        <div class="tab-pane" id="seguranca">
+                            <h2>Segurança</h2>
+                            <form id="formSeguranca">
+                                <label>Senha atual</label>
+                                <input type="password" id="segurancaSenhaAtual" placeholder="********">
+                                
+                                <label>Nova senha</label>
+                                <input type="password" id="segurancaNovaSenha" placeholder="Nova senha">
+                                
+                                <label>Confirmar nova senha</label>
+                                <input type="password" id="segurancaConfirmarSenha" placeholder="Confirme a nova senha">
+                                
+                                <label><input type="checkbox" id="segurancaDoisFatores"> Ativar verificação em duas etapas</label>
+                                
+                                <button type="submit" class="settings-save-btn">Alterar senha</button>
+                            </form>
+                        </div>
+
+                        <!-- Ajuda -->
+                        <div class="tab-pane" id="ajuda">
+                            <h2>Ajuda</h2>
+                            <p>Perguntas frequentes:</p>
+                            <ul>
+                                <li><a href="#">Como alterar meu e-mail?</a></li>
+                                <li><a href="#">Esqueci minha senha</a></li>
+                                <li><a href="#">Como alugar um livro?</a></li>
+                                <li><a href="#">Política de devolução</a></li>
+                            </ul>
+                            <p>Suporte: <a href="mailto:suporte@bibliotec.com">suporte@bibliotec.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="blocked-message">
+                <div class="blocked-card">
+                    <span class="fa fa-lock" style="font-size: 48px; color: #667eea;"></span>
+                    <h2>Acesso Restrito</h2>
+                    <p>Você precisa estar logado para acessar esta página.</p>
+                    <div class="blocked-buttons">
+                        <a href="Login.html" class="btn-login">Fazer Login</a>
+                        <a href="Cadastro_Cargo.html" class="btn-cadastro">Cadastrar-se</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 BiblioTEC. Todos os direitos reservados.</p>
+            <p>
+                <a href="#">Sobre</a> | 
+                <a href="#">Contato</a> | 
+                <a href="#">Termos de uso</a>
+            </p>
+        </div>
+    </footer>
+
+    <script type="module" src="JS/Config.js"></script>
+</body>
+</html>

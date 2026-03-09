@@ -1,0 +1,469 @@
+/* ===== RESET E ESTILOS GLOBAIS ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    overflow-x: hidden;
+    background: #f8f9fa;
+}
+
+/* ===== HEADER E MENU OFF-CANVAS (igual às outras) ===== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: #1738cc;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    z-index: 999;
+}
+
+.menu-ligar {
+    flex: 0 0 40px;
+    height: 40px;
+    background: #0b009e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.menu-ligar span {
+    width: 25px;
+    height: 2px;
+    background: white;
+    transition: 0.3s;
+}
+
+.menu-ligar.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+.menu-ligar.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-ligar.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.logo img {
+    height: 110px;
+    width: auto;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
+.header::after {
+    content: "";
+    flex: 0 0 40px;
+}
+
+.offcanvas-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+}
+
+.offcanvas-menu.active {
+    left: 0;
+}
+
+.menu-header {
+    background: linear-gradient(135deg, #2f52ec 0%, hsl(202, 100%, 60%) 100%);
+    padding: 20px;
+    color: white;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.user-email {
+    font-size: 12px;
+    opacity: 0.9;
+    margin-bottom: 2px;
+}
+.user-type {
+    font-size: 11px;
+    background: rgba(255,255,255,0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+    align-self: flex-start;
+}
+
+.menu-items {
+    list-style: none;
+    padding: 10px 0;
+}
+.menu-items li {
+    border-bottom: 1px solid #f0f0f0;
+}
+.menu-items li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.3s;
+    gap: 12px;
+}
+.menu-items li a:hover {
+    background: #f5f5f5;
+}
+.menu-items li.active a {
+    background: #e8f0fe;
+    color: #1738cc;
+    font-weight: 500;
+    border-left: 3px solid #1738cc;
+}
+.menu-items .logout {
+    border-top: 1px solid #f0f0f0;
+    margin-top: 10px;
+}
+.menu-items .logout a {
+    color: #dc3545;
+}
+.menu-items .logout a:hover {
+    background: #fff5f5;
+}
+.menu-items .login a {
+    color: #28a745;
+}
+.menu-items .login a:hover {
+    background: #e8f5e9;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 1000;
+}
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.main-content {
+    padding: 80px 20px 20px;
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.main-div {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estado de carregamento */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    font-size: 18px;
+    color: #667eea;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Tela de bloqueio */
+#blocked-message {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.blocked-card {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    border-top: 5px solid #667eea;
+}
+
+.blocked-card h2 {
+    font-size: 28px;
+    color: #333;
+    margin: 20px 0 10px;
+}
+
+.blocked-card p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.blocked-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #667eea);
+    color: white;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+}
+
+.btn-cadastro {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.btn-cadastro:hover {
+    background: #f0f3ff;
+    transform: translateY(-2px);
+}
+
+/* ===== ESTILOS ESPECÍFICOS DA PÁGINA DE ALUGUÉIS ===== */
+.page-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.page-header h1 {
+    font-size: 36px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.page-header h1 i {
+    color: #667eea;
+}
+.page-header p {
+    color: #666;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+    margin: 20px 0 40px;
+}
+
+.emprestimos-container {
+    min-height: 300px;
+}
+
+/* Estado vazio */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.empty-state h2 {
+    font-size: 24px;
+    color: #333;
+    margin: 20px 0 10px;
+}
+
+.empty-state p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.btn-explorar {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-explorar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+}
+
+/* Lista de empréstimos */
+.emprestimo-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.emprestimo-card img {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.emprestimo-info {
+    flex: 1;
+}
+
+.emprestimo-info h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.emprestimo-info p {
+    color: #666;
+    font-size: 14px;
+    margin: 3px 0;
+}
+
+.emprestimo-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #e8f5e9;
+    color: #28a745;
+}
+
+.emprestimo-status.atrasado {
+    background: #ffebee;
+    color: #dc3545;
+}
+
+/* ===== FOOTER (igual à home) ===== */
+.footer {
+    background: #000b3b;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 40px;
+    font-size: 14px;
+    border-top: 3px solid #667eea;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.footer a {
+    color: #bb9aff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .offcanvas-menu {
+        width: 280px;
+    }
+    .user-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    .user-details {
+        align-items: center;
+    }
+    .page-header h1 {
+        font-size: 28px;
+    }
+    .emprestimo-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .emprestimo-card img {
+        width: 100px;
+        height: 120px;
+    }
+}

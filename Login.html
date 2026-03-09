@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BiblioTEC</title>
+    <link rel="icon" type="image/x-icon" href="images/BiblioTEC_Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="CSS/Login_Style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <!-- Div para mensagens -->
+        <div id="mensagemLogin" class="logMensagem"></div>
+        
+        <div class="user-type-selector">
+            <button type="button" class="type-btn active" id="btnAluno">
+                <i class="fa fa-graduation-cap"></i> Aluno
+            </button>
+            <button type="button" class="type-btn" id="btnLeitor">
+                <i class="fa fa-user"></i> Leitor
+            </button>
+        </div>
+
+        <form id="loginForm">
+            <input type="email" id="login" placeholder="E-mail" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button type="submit">
+                <i class="fa fa-sign-in"></i> Entrar
+            </button>
+        </form>
+        <!-- Botão Esqueceu a senha -->
+<div style="text-align: right; margin-top: 5px;">
+    <button type="button" id="esqueciSenha" class="link-btn">Esqueceu a senha?</button>
+</div>
+
+<!-- Modal de redefinição de senha -->
+<div id="modalResetSenha" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>Redefinir senha</h3>
+        <p>Digite seu e-mail para receber o link de redefinição.</p>
+        <form id="formResetSenha">
+            <input type="email" id="emailReset" placeholder="Seu e-mail" required>
+            <button type="submit" id="btnEnviarReset">Enviar</button>
+        </form>
+    </div>
+</div>
+        <p class="link">
+            <a href="Cadastro_Cargo.html">Não tem conta? Cadastre-se</a>
+        </p>
+        <button class="voltar" onclick="history.back()">
+            <i class="fa fa-arrow-left"></i> Voltar
+        </button>
+    </div>
+    <script type="module" src="JS/Firebase_Login.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Leitor</title>
+    <link rel="icon" type="image/x-icon" href="images/BiblioTEC_Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="CSS/Cad_Usuario_Style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro</h2>
+        <div id="mensagemCadastro" class="cadMensagem"></div>
+        <form id="cadastroForm">
+            <input type="hidden" id="tipoUsuario" value="leitor">
+            <input type="text" id="cpfUsu" placeholder="CPF" required>
+            <input type="email" id="emailUsu" placeholder="nome@gmail.com" required>
+            <input type="password" id="passwordUsu" placeholder="Senha" required>
+            <input type="password" id="confirmPasswordUsu" placeholder="Confirmar Senha" required>
+            <button type="submit" id="submitSignUp">Cadastrar</button>
+        </form>
+        <p class="link">
+            <a href="login.html">Já tem conta? Faça login</a>
+        </p>
+        <button class="voltar" onclick="history.back()">
+            <i class="fa fa-arrow-left"></i> Voltar
+        </button>
+    </div>
+
+    <script type="module" src="JS/Firebase_Cad_Leitor.js"></script>
+</body>
+</html>

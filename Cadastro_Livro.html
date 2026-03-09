@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Livro - BiblioTEC</title>
+    <link rel="icon" type="image/x-icon" href="images/BiblioTEC_Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="CSS/Cad_Livro_Style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastrar Novo Livro</h2>
+        <div id="mensagemCadastro" class="cadMensagem"></div>
+
+        <form id="cadastroLivroForm">
+            <!-- Biblioteca -->
+            <label for="bibliotecaId">Biblioteca *</label>
+            <select id="bibliotecaId" required>
+                <option value="">Carregando bibliotecas...</option>
+            </select>
+
+            <!-- Título -->
+            <label for="tituloLivro">Título *</label>
+            <input type="text" id="tituloLivro" placeholder="Ex: O Iluminado" required>
+
+            <!-- Autor -->
+            <label for="autorLivro">Autor *</label>
+            <input type="text" id="autorLivro" placeholder="Ex: Stephen King" required>
+
+            <!-- Gênero -->
+            <label for="generoLivro">Gênero *</label>
+            <input type="text" id="generoLivro" placeholder="Ex: Terror" required>
+
+            <!-- Ano de Publicação -->
+            <label for="anoPublicacao">Ano de Publicação *</label>
+            <input type="number" id="anoPublicacao" placeholder="Ex: 1977" required>
+
+            <!-- Quantidade total -->
+            <label for="quantidadeTotal">Quantidade total de exemplares *</label>
+            <input type="number" id="quantidadeTotal" placeholder="Ex: 3" required>
+
+            <!-- URL da capa (opcional) -->
+            <label for="capaUrl">URL da capa (opcional)</label>
+            <input type="url" id="capaUrl" placeholder="https://...">
+
+            <button type="submit" id="submitBtn">
+                <i class="fa fa-save"></i> Cadastrar Livro
+            </button>
+        </form>
+
+        <button class="voltar" onclick="history.back()">
+            <i class="fa fa-arrow-left"></i> Voltar
+        </button>
+    </div>
+
+    <script type="module" src="JS/Book_Insert.js"></script>
+</body>
+</html>

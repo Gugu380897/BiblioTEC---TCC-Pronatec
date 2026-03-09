@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Estudante</title>
+    <link rel="icon" type="image/x-icon" href="images/BiblioTEC_Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="CSS/Cad_Estudante_Style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro Estudante</h2>
+        <div id="mensagemCadastro" class="cadMensagem"></div>
+        <form id="cadastroForm">
+            <input type="hidden" id="tipoUsuario" value="estudante">
+            <input type="text" id="idEstu" placeholder="CPF" required>
+            <input type="email" id="emailEstu" placeholder="nome@aluno.gov.ce.br" required>
+            <input type="password" id="passwordEstu" placeholder="Senha" required>
+            <input type="password" id="confirmPasswordEstu" placeholder="Confirmar Senha" required>
+            <button type="submit" id="submitSignUp">Cadastrar</button>
+        </form>
+        <p class="link">
+            <a href="login.html">Já tem conta? Faça login</a>
+        </p>
+        <button class="voltar" onclick="history.back()">
+            <i class="fa fa-arrow-left"></i> Voltar
+        </button>
+    </div>
+
+    <script type="module" src="JS/Firebase_Cad_Estudante.js"></script>
+</body>
+</html>

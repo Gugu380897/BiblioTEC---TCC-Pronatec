@@ -1,0 +1,87 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCLPilBx209EHaQ0NWfC01TyBAfvZapvxc",
+  authDomain: "bibliotec-scrummaster.firebaseapp.com",
+  projectId: "bibliotec-scrummaster",
+  storageBucket: "bibliotec-scrummaster.firebasestorage.app",
+  messagingSenderId: "221899806730",
+  appId: "1:221899806730:web:276140293f866d02a927f3",
+  measurementId: "G-77QGCG7YFQ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const signUp = document.getElementById("submitSignUp");
+if (signUp) {
+    signUp.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const Email = document.getElementById("emailUsu").value;
+        const Password = document.getElementById("passwordUsu").value;
+        const ConfirmPassword = document.getElementById("confirmPasswordUsu").value;
+        const Cpf = document.getElementById("cpfUsu").value;
+
+        if (Password !== ConfirmPassword) {
+            mostrarMensagem("As senhas não coincidem!");
+            return;
+        }
+
+        function mostrarMensagem(texto, tipo = 'sucesso') {
+        const msgDiv = document.getElementById('mensagemCadastro');
+            msgDiv.textContent = texto;
+            msgDiv.className = 'cadMensagem ' + tipo; // tipo pode ser 'sucesso', 'erro' ou 'aviso'
+            msgDiv.style.display = 'flex'; // ou 'block'
+
+        // Remove após 3 segundos (tempo da animação)
+        setTimeout(() => {
+            msgDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, Email, Password);
+            const user = userCredential.user;
+            await setDoc(doc(db, "users", user.uid), {
+                email: Email,
+                cpf: Cpf,
+                createdAt: new Date()
+            });
+            mostrarMensagem('Usuário cadastrado com sucesso!', 'sucesso');
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 3000);
+            
+        } catch (error) {
+                switch (error.code) {
+                    case 'auth/weak-password':
+                        mostrarMensagem("A senha é muito fraca. Use pelo menos 6 caracteres.", 'aviso');
+                        break;
+                    case 'auth/email-already-in-use':
+                        mostrarMensagem("Este e-mail já está em uso.", 'aviso');
+                        break;
+                    case 'auth/invalid-email':
+                        mostrarMensagem("E-mail inválido.", 'erro');
+                        break;
+                    default:
+                        mostrarMensagem("Erro no cadastro: " + e.message, 'erro');
+                }
+            }
+    });
+}

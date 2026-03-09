@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Bibliotecário - BiblioTEC</title>
+    <link rel="icon" type="image/x-icon" href="images/BiblioTEC_Logo.png">
+    <link rel="stylesheet" href="CSS/Home_Bibliotecario_Style.css">
+    <script type="module" src="JS/Firebase_Auth.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- HEADER COM MENU OFF-CANVAS E LOGO -->
+    <header class="header">
+        <button class="menu-ligar" id="menuLigar">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="logo">
+            <img src="images/BiblioTEC_Logo.png" alt="BiblioTEC Logo">
+        </div>
+        <div class="overlay" id="overlay"></div>
+
+        <nav class="offcanvas-menu" id="offcanvasMenu">
+            <div class="menu-header">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="https://via.placeholder.com/60" alt="Avatar">
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">Carregando...</span>
+                        <span class="user-email">carregando...</span>
+                        <span class="user-type">...</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="menu-items">
+                <!-- Itens para bibliotecário -->
+                <li class="active"><a href="Home_Bibliotecario.html"><span class="fa fa-home"></span>Home</a></li>
+                <li class="user-menu-item"><a href="Profile_Bibliotecario.html"><span class="fa fa-user"></span>Meu
+                        Perfil</a></li>
+                <li class="user-menu-item"><a href="Configurations_Biblioteca.html"><span
+                            class="fa fa-cog"></span>Configurações</a></li>
+                <!-- Logout -->
+                <li class="logout"><a href="#"><span class="fa fa-sign-out"></span>Sair</a></li>
+                <!-- Itens para usuários não logados (não devem aparecer aqui) -->
+                <li class="login" style="display:none;"><a href="Login_Bibliotecario.html"><span
+                            class="fa fa-sign-in"></span>Login</a></li>
+                <li class="login" style="display:none;"><a href="Cadastro_Bibliotecario.html"><span
+                            class="fa fa-user-plus"></span>Cadastrar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+        <div class="main-div">
+            <!-- Loader -->
+            <div id="loading-state" class="loading-state">
+                <div class="spinner"></div>
+                <span>Carregando...</span>
+            </div>
+
+            <!-- Conteúdo para usuários logados -->
+            <div id="logged-content">
+                <!-- Boas-vindas e informações da biblioteca -->
+                <div class="welcome-header">
+                    <h1>Painel do Bibliotecário</h1>
+                    <p>Bem-vindo, <span id="biblioNome">Carregando...</span></p>
+                </div>
+                <div class="line"></div>
+
+                <!-- Cards de ações rápidas -->
+                <div class="actions-grid">
+                    <div class="action-card" id="btnAdicionarLivro">
+                        <i class="fa fa-plus-circle"></i>
+                        <h3>Adicionar Livro</h3>
+                        <p>Cadastre um novo livro no acervo</p>
+                    </div>
+                    <div class="action-card" id="btnRegistrarEmprestimo">
+                        <i class="fa fa-hand-o-right"></i>
+                        <h3>Registrar Empréstimo</h3>
+                        <p>Registre o empréstimo de um livro</p>
+                    </div>
+                    <div class="action-card" id="btnRegistrarDevolucao">
+                        <i class="fa fa-undo"></i>
+                        <h3>Registrar Devolução</h3>
+                        <p>Registre a devolução de um livro</p>
+                    </div>
+                    <div class="action-card" id="btnListarEmprestimos">
+                        <i class="fa fa-list"></i>
+                        <h3>Ver Empréstimos Atuais</h3>
+                        <p>Lista de empréstimos em andamento</p>
+                    </div>
+                </div>
+
+                <!-- Seção da biblioteca atual -->
+                <div class="biblioteca-info">
+                    <h2>Sua Biblioteca: <span id="nomeBibliotecaAtual">Carregando...</span></h2>
+                    <p>ID: <span id="idBiblioteca">Carregando...</span></p>
+                </div>
+
+                <!-- Lista de livros da biblioteca -->
+                <h2>Livros da Biblioteca</h2>
+                <div class="livros-container" id="livrosContainer">
+                    <!-- Livros serão inseridos via JS -->
+                </div>
+            </div>
+
+            <!-- Conteúdo para usuários não logados (bloqueio) -->
+            <div id="blocked-message">
+                <div class="blocked-card">
+                    <span class="fa fa-lock" style="font-size: 48px; color: #667eea;"></span>
+                    <h2>Acesso Restrito</h2>
+                    <p>Você precisa estar logado como bibliotecário para acessar esta página.</p>
+                    <div class="blocked-buttons">
+                        <a href="Login_Bibliotecario.html" class="btn-login">Fazer Login</a>
+                        <a href="Cadastro_Bibliotecario.html" class="btn-cadastro">Cadastrar-se</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL DE CADASTRO DE LIVRO -->
+    <div id="modalCadastroLivro" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Cadastrar Novo Livro</h3>
+            <form id="formCadastroLivroModal">
+                <label for="modalTituloLivro">Título *</label>
+                <input type="text" id="modalTituloLivro" placeholder="Ex: O Iluminado" required>
+
+                <label for="modalAutorLivro">Autor *</label>
+                <input type="text" id="modalAutorLivro" placeholder="Ex: Stephen King" required>
+
+                <label for="modalGeneroLivro">Gênero *</label>
+                <input type="text" id="modalGeneroLivro" placeholder="Ex: Terror" required>
+
+                <label for="modalAnoPublicacao">Ano de Publicação *</label>
+                <input type="number" id="modalAnoPublicacao" placeholder="Ex: 1977" required>
+
+                <label for="modalQuantidadeTotal">Quantidade total de exemplares *</label>
+                <input type="number" id="modalQuantidadeTotal" placeholder="Ex: 3" required>
+
+                <label for="modalCapaUrl">URL da capa (opcional)</label>
+                <input type="url" id="modalCapaUrl" placeholder="https://...">
+
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+    <!-- MODAL DE EDIÇÃO DE LIVRO -->
+<div id="modalEditarLivro" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-modal" id="closeEditarModal">&times;</span>
+        <h3>Editar Livro</h3>
+        <form id="formEditarLivro">
+            <input type="hidden" id="editarLivroId" value=""> <!-- ID numérico -->
+            <input type="hidden" id="editarLivroKey" value=""> <!-- chave Firebase -->
+
+            <label for="editarTitulo">Título *</label>
+            <input type="text" id="editarTitulo" required>
+
+            <label for="editarAutor">Autor *</label>
+            <input type="text" id="editarAutor" required>
+
+            <label for="editarGenero">Gênero *</label>
+            <input type="text" id="editarGenero" required>
+
+            <label for="editarAno">Ano de Publicação *</label>
+            <input type="number" id="editarAno" required>
+
+            <label for="editarQuantidade">Quantidade total *</label>
+            <input type="number" id="editarQuantidade" required>
+
+            <label for="editarCapa">URL da capa (opcional)</label>
+            <input type="url" id="editarCapa">
+
+            <div class="modal-footer">
+                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+                <button type="button" class="btn-deletar" id="btnDeletarLivro">Deletar Livro</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DE REGISTRAR EMPRÉSTIMO -->
+<div id="modalRegistrarEmprestimo" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-modal" id="closeEmprestimoModal">&times;</span>
+        <h3>Registrar Empréstimo</h3>
+        <form id="formRegistrarEmprestimo">
+            <label for="emprestimoUsuario">Usuário *</label>
+            <select id="emprestimoUsuario" required>
+                <option value="">Carregando usuários...</option>
+            </select>
+
+            <label for="emprestimoLivro">Livro *</label>
+            <select id="emprestimoLivro" required>
+                <option value="">Carregando livros...</option>
+            </select>
+
+            <label for="emprestimoDataDevolucao">Data de Devolução *</label>
+            <input type="date" id="emprestimoDataDevolucao" required>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn-salvar">Registrar Empréstimo</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DE DEVOLUÇÃO -->
+<div id="modalDevolucao" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-modal" id="closeDevolucaoModal">&times;</span>
+        <h3>Registrar Devolução</h3>
+        <form id="formDevolucao">
+            <label for="devolucaoUsuario">Usuário *</label>
+            <select id="devolucaoUsuario" required>
+                <option value="">Carregando usuários...</option>
+            </select>
+
+            <label for="devolucaoEmprestimo">Empréstimo *</label>
+            <select id="devolucaoEmprestimo" required>
+                <option value="">Selecione um usuário primeiro</option>
+            </select>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn-salvar">Confirmar Devolução</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DE LISTAGEM DE EMPRÉSTIMOS -->
+<div id="modalListarEmprestimos" class="modal" style="display:none;">
+    <div class="modal-content" style="max-width: 900px;">
+        <span class="close-modal" id="closeListarModal">&times;</span>
+        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+            <button class="type-btn active" id="btnVerAtivos">Empréstimos Ativos</button>
+            <button class="type-btn" id="btnVerDevolucoes">Devoluções</button>
+        </div>
+        <div style="overflow-x: auto;">
+            <table id="tabelaEmprestimos" style="width:100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px;">Usuário</th>
+                        <th style="padding: 10px;">Livro</th>
+                        <th style="padding: 10px;">Data Empréstimo</th>
+                        <th style="padding: 10px;">Data Devolução</th>
+                        <th style="padding: 10px;">Status</th>
+                        <th style="padding: 10px;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyEmprestimos">
+                    <tr><td colspan="6" style="text-align:center;">Carregando...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancelar" id="btnFecharListar">Fechar</button>
+        </div>
+    </div>
+</div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 BiblioTEC. Todos os direitos reservados.</p>
+            <p>
+                <a href="#">Sobre</a> |
+                <a href="#">Contato</a> |
+                <a href="#">Termos de uso</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="JS/Home_Bibliotecario_Auth.js"></script>
+</body>
+
+</html>

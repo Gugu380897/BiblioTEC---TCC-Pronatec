@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Bibliotecário - BiblioTEC</title>
+    <link rel="icon" type="image/x-icon" href="images/BiblioTEC_Logo.png">
+    <link rel="stylesheet" href="CSS/Profile_Bibliotecario_Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- HEADER COM MENU OFF-CANVAS E LOGO -->
+    <header class="header">
+        <button class="menu-ligar" id="menuLigar">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="logo">
+            <img src="images/BiblioTEC_Logo.png" alt="BiblioTEC Logo">
+        </div>
+        <div class="overlay" id="overlay"></div>
+
+        <nav class="offcanvas-menu" id="offcanvasMenu">
+            <div class="menu-header">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="https://via.placeholder.com/60" alt="Avatar">
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">Carregando...</span>
+                        <span class="user-email">carregando...</span>
+                        <span class="user-type">...</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="menu-items">
+                <li><a href="Home_Bibliotecario.html"><span class="fa fa-home"></span>Home</a></li>
+                <li><a href="Profile_Bibliotecario.html"><span class="fa fa-user"></span>Meu Perfil</a></li>
+                <li><a href="Configurations_Biblioteca.html"><span class="fa fa-cog"></span>Configurações</a></li>
+                <li class="logout"><a href="#"><span class="fa fa-sign-out"></span>Sair</a></li>
+                <li class="login" style="display:none;"><a href="Login_Bibliotecario.html"><span class="fa fa-sign-in"></span>Login</a></li>
+                <li class="login" style="display:none;"><a href="Cadastro_Bibliotecario.html"><span class="fa fa-user-plus"></span>Cadastrar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+        <div class="main-div">
+            <!-- Loader -->
+            <div id="loading-state" class="loading-state">
+                <div class="spinner"></div>
+                <span>Carregando...</span>
+            </div>
+
+            <!-- Conteúdo para usuários logados -->
+            <div id="logged-content">
+                <div class="profile-header">
+                    <h1><i class="fa fa-user-circle"></i> Meu Perfil (Bibliotecário)</h1>
+                </div>
+                <div class="line"></div>
+
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <img src="https://via.placeholder.com/150" alt="Avatar" id="profileAvatar">
+                    </div>
+                    <div class="profile-info">
+                        <div class="info-row">
+                            <span class="info-label">Nome:</span>
+                            <span class="info-value" id="profileNome">Carregando...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">E-mail:</span>
+                            <span class="info-value" id="profileEmail">Carregando...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">ID da Biblioteca:</span>
+                            <span class="info-value" id="profileIdBiblioteca">Carregando...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Nome da Biblioteca:</span>
+                            <span class="info-value" id="profileNomeBiblioteca">Carregando...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Número do Bibliotecário:</span>
+                            <span class="info-value" id="profileIdBibliotecarioNum">Carregando...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botão para editar (redireciona para configurações) -->
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="btnEditarPerfil" class="profile-btn">
+                        <i class="fa fa-pencil"></i> Editar Perfil
+                    </button>
+                </div>
+            </div>
+
+            <!-- Conteúdo para usuários não logados (bloqueio) -->
+            <div id="blocked-message">
+                <div class="blocked-card">
+                    <span class="fa fa-lock" style="font-size: 48px; color: #667eea;"></span>
+                    <h2>Acesso Restrito</h2>
+                    <p>Você precisa estar logado como bibliotecário para acessar esta página.</p>
+                    <div class="blocked-buttons">
+                        <a href="Login_Bibliotecario.html" class="btn-login">Fazer Login</a>
+                        <a href="Cadastro_Bibliotecario.html" class="btn-cadastro">Cadastrar-se</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 BiblioTEC. Todos os direitos reservados.</p>
+            <p>
+                <a href="#">Sobre</a> | 
+                <a href="#">Contato</a> | 
+                <a href="#">Termos de uso</a>
+            </p>
+        </div>
+    </footer>
+
+    <script type="module" src="JS/Profile_Bibliotecario_Auth.js"></script>
+</body>
+</html>

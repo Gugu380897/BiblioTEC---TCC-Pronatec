@@ -1,0 +1,133 @@
+mutation SeedData @transaction {
+  library_insertMany(data: [
+    {
+      id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      name: "Central Library",
+      address: "123 Main St, Anytown, USA",
+      phoneNumber: "555-123-4567",
+      email: "info@centrallibrary.com",
+      createdAt: "2023-01-15T10:00:00Z"
+    },
+    {
+      id: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+      name: "Community Branch",
+      address: "456 Oak Ave, Anytown, USA",
+      phoneNumber: "555-987-6543",
+      email: "branch@communitylibrary.com",
+      createdAt: "2023-02-20T11:30:00Z"
+    }
+  ]) {
+    id
+  }
+  user_insertMany(data: [
+    {
+      id: "c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
+      displayName: "Alice Smith",
+      userType: "Member",
+      email: "alice@example.com",
+      photoUrl: "https://example.com/alice.jpg",
+      createdAt: "2023-03-01T09:00:00Z",
+      libraryId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
+    },
+    {
+      id: "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44",
+      displayName: "Bob Johnson",
+      userType: "Librarian",
+      email: "bob@example.com",
+      photoUrl: "https://example.com/bob.jpg",
+      createdAt: "2023-03-05T14:00:00Z",
+      libraryId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
+    },
+    {
+      id: "e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55",
+      displayName: "Charlie Brown",
+      userType: "Member",
+      email: "charlie@example.com",
+      photoUrl: "https://example.com/charlie.jpg",
+      createdAt: "2023-03-10T16:00:00Z",
+      libraryId: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22"
+    }
+  ]) {
+    id
+  }
+  book_insertMany(data: [
+    {
+      id: "f5eebc99-9c0b-4ef8-bb6d-6bb9bd380a66",
+      title: "The Great Adventure",
+      author: "Jane Doe",
+      isbn: "978-1234567890",
+      publicationYear: 2020,
+      totalCopies: 5,
+      availableCopies: 3,
+      createdAt: "2023-04-01T08:00:00Z",
+      genre: "Adventure",
+      description: "An exciting adventure story.",
+      libraryId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
+    },
+    {
+      id: "g6eebc99-9c0b-4ef8-bb6d-6bb9bd380a77",
+      title: "Mystery of the Old House",
+      author: "John Smith",
+      isbn: "978-0987654321",
+      publicationYear: 2018,
+      totalCopies: 3,
+      availableCopies: 1,
+      createdAt: "2023-04-05T09:00:00Z",
+      genre: "Mystery",
+      description: "A thrilling mystery novel.",
+      libraryId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
+    },
+    {
+      id: "h7eebc99-9c0b-4ef8-bb6d-6bb9bd380a88",
+      title: "Coding for Beginners",
+      author: "Code Master",
+      isbn: "978-1122334455",
+      publicationYear: 2022,
+      totalCopies: 10,
+      availableCopies: 8,
+      createdAt: "2023-04-10T10:00:00Z",
+      genre: "Programming",
+      description: "Learn to code from scratch.",
+      libraryId: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22"
+    }
+  ]) {
+    id
+  }
+  loan_insertMany(data: [
+    {
+      id: "i8eebc99-9c0b-4ef8-bb6d-6bb9bd380a99",
+      loanDate: "2023-05-01",
+      dueDate: "2023-05-15",
+      status: "Borrowed",
+      createdAt: "2023-05-01T10:00:00Z",
+      bookId: "f5eebc99-9c0b-4ef8-bb6d-6bb9bd380a66",
+      userId: "c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
+      libraryId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
+    },
+    {
+      id: "j9eebc99-9c0b-4ef8-bb6d-6bb9bd380b00",
+      loanDate: "2023-05-02",
+      dueDate: "2023-05-16",
+      status: "Borrowed",
+      createdAt: "2023-05-02T11:00:00Z",
+      bookId: "g6eebc99-9c0b-4ef8-bb6d-6bb9bd380a77",
+      userId: "c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
+      libraryId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
+    }
+  ]) {
+    id
+  }
+  reservation_insertMany(data: [
+    {
+      id: "k0eebc99-9c0b-4ef8-bb6d-6bb9bd380b11",
+      reservationDate: "2023-05-03",
+      status: "Pending",
+      createdAt: "2023-05-03T12:00:00Z",
+      bookId: "h7eebc99-9c0b-4ef8-bb6d-6bb9bd380a88",
+      userId: "e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55",
+      libraryId: "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22"
+    }
+  ]) {
+    id
+  }
+}
