@@ -1,0 +1,560 @@
+/* ===== RESET E ESTILOS GLOBAIS ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    overflow-x: hidden;
+    background: #f8f9fa;
+}
+
+/* ===== HEADER E MENU OFF-CANVAS (igual às outras) ===== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: #1738cc;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    z-index: 999;
+}
+
+/* MENSAGEM DE AVISO */
+.cadMensagem {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 280px;
+    max-width: 400px;
+    padding: 16px 24px;
+    border-radius: 50px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    color: #333;
+    border-left: 5px solid #1738cc;
+    animation: slideDown 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(23, 56, 204, 0.2);
+}
+
+.cadMensagem {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 2000;
+    display: none;
+    max-width: 350px;
+    text-align: center;
+    color: white;
+    animation: slideIn 0.3s ease;
+}
+
+.cadMensagem.sucesso {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.cadMensagem.erro {
+    background: linear-gradient(135deg, #dc3545, #f56c6c);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.menu-ligar {
+    flex: 0 0 40px;
+    height: 40px;
+    background: #0b009e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.menu-ligar span {
+    width: 25px;
+    height: 2px;
+    background: white;
+    transition: 0.3s;
+}
+
+.menu-ligar.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+.menu-ligar.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-ligar.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.logo img {
+    height: 110px;
+    width: auto;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
+.header::after {
+    content: "";
+    flex: 0 0 40px;
+}
+
+.offcanvas-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+}
+
+.offcanvas-menu.active {
+    left: 0;
+}
+
+.menu-header {
+    background: linear-gradient(135deg, #2f52ec 0%, hsl(202, 100%, 60%) 100%);
+    padding: 20px;
+    color: white;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.user-email {
+    font-size: 12px;
+    opacity: 0.9;
+    margin-bottom: 2px;
+}
+.user-type {
+    font-size: 11px;
+    background: rgba(255,255,255,0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+    align-self: flex-start;
+}
+
+.menu-items {
+    list-style: none;
+    padding: 10px 0;
+}
+.menu-items li {
+    border-bottom: 1px solid #f0f0f0;
+}
+.menu-items li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.3s;
+    gap: 12px;
+}
+.menu-items li a:hover {
+    background: #f5f5f5;
+}
+.menu-items li.active a {
+    background: #e8f0fe;
+    color: #1738cc;
+    font-weight: 500;
+    border-left: 3px solid #1738cc;
+}
+.menu-items .logout {
+    border-top: 1px solid #f0f0f0;
+    margin-top: 10px;
+}
+.menu-items .logout a {
+    color: #dc3545;
+}
+.menu-items .logout a:hover {
+    background: #fff5f5;
+}
+.menu-items .login a {
+    color: #28a745;
+}
+.menu-items .login a:hover {
+    background: #e8f5e9;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 1000;
+}
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.main-content {
+    padding: 80px 20px 20px;
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.main-div {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estado de carregamento */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    font-size: 18px;
+    color: #667eea;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Tela de bloqueio */
+#blocked-message {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.blocked-card {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    border-top: 5px solid #667eea;
+}
+
+.blocked-card h2 {
+    font-size: 28px;
+    color: #333;
+    margin: 20px 0 10px;
+}
+
+.blocked-card p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.blocked-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #667eea);
+    color: white;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+}
+
+.btn-cadastro {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.btn-cadastro:hover {
+    background: #f0f3ff;
+    transform: translateY(-2px);
+}
+
+/* ===== PÁGINA DE HISTÓRICO ===== */
+.page-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.page-header h1 {
+    font-size: 32px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.page-header h1 .fa {
+    color: #1738cc;
+}
+.page-header p {
+    color: #666;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #1738cc, #0025f5, transparent);
+    margin: 20px 0 40px;
+}
+
+/* Container dos cards de empréstimos */
+.historico-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Card de empréstimo */
+.emprestimo-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.emprestimo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.emprestimo-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.emprestimo-info {
+    padding: 20px;
+}
+
+.emprestimo-info h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.emprestimo-info .autor {
+    color: #666;
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.emprestimo-detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.emprestimo-detalhes span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.emprestimo-detalhes i {
+    color: #667eea;
+    width: 18px;
+}
+
+.emprestimo-status {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    background: #e8f5e9;
+    color: #28a745;
+}
+
+.emprestimo-status.devolvido {
+    background: #e8f5e9;
+    color: #28a745;
+}
+
+.emprestimo-status.pendente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.emprestimo-status.atrasado {
+    background: #f8d7da;
+    color: #dc3545;
+}
+
+/* Mensagem quando não há empréstimos */
+.historico-vazio {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    grid-column: 1 / -1;
+}
+
+.historico-vazio i {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.historico-vazio p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: #000b3b;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 40px;
+    font-size: 14px;
+    border-top: 3px solid #667eea;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.footer a {
+    color: #bb9aff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .offcanvas-menu {
+        width: 280px;
+    }
+    .user-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    .user-details {
+        align-items: center;
+    }
+    .page-header h1 {
+        font-size: 24px;
+    }
+    .historico-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 70px 10px 20px;
+    }
+    .emprestimo-card img {
+        height: 150px;
+    }
+}
