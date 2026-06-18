@@ -6,5 +6,11 @@ o intuito de criar essa aplicação foi para auxiliar a manutenção de bibliote
 tendo em mente a intenção de servir tanto para bibliotecas publicas, tanto para bibliotecas escolares.
 
 O site não se encontra com todas as suas funções verdadeiramente funcionais, somente as partes mais importantes para o funcionamento do mesmo estão em disposição.
+Além disso, a prévia demonstrada por meio do github pages está com varios erros que eu desconheço e que no futuro talvez planeje arruma-los.
 
-<a href="Home.html"> BiblioTEC Link </a>
+ids das bibliotecas 
+biblioteca aguiar - 1
+biblioteca nunes de menezes - 2
+biblioteca liceu - 3
+
+<a href="=https://gugu380897.github.io/BiblioTEC---TCC-Pronatec/Home.html"> BiblioTEC Link </a>
